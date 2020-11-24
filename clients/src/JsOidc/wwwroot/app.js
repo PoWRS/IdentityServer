@@ -86,6 +86,7 @@ function renewToken() {
             log("silent renew success");
             document.querySelector(".login").style.visibility = "hidden";
             document.querySelector(".logout").style.visibility = "visible";
+            $('.drawer').drawer('close');
             showTokens();
         }).catch(function (err) {
             log("silent renew error", err);
@@ -121,6 +122,10 @@ document.querySelector(".logout").addEventListener("click", logout, false);
 document.querySelector(".login").style.visibility = "visible";
 document.querySelector(".logout").style.visibility = "hidden";
 document.defaultView.addEventListener("load", renewToken, false);
+$(document).ready(function () {
+    $('.drawer').drawer();
+    $('.drawer').drawer('open');
+});
 
 
 function log(data) {
@@ -175,6 +180,7 @@ function handleCallback() {
         showTokens();
         document.querySelector(".login").style.visibility = "hidden";
         document.querySelector(".logout").style.visibility = "visible";
+        $('.drawer').drawer('close');
         window.history.replaceState({},
             window.document.title,
             window.location.origin + window.location.pathname);
