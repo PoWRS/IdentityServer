@@ -84,6 +84,8 @@ function renewToken() {
     mgr.signinSilent()
         .then(function () {
             log("silent renew success");
+            document.querySelector(".login").style.visibility = "hidden";
+            document.querySelector(".logout").style.visibility = "visible";
             showTokens();
         }).catch(function (err) {
             log("silent renew error", err);
@@ -115,26 +117,24 @@ if (window.location.hash) {
 }
 
 document.querySelector(".login").addEventListener("click", login, false);
-document.querySelector(".popup").addEventListener("click", popup, false);
-document.querySelector(".renew").addEventListener("click", renewToken, false);
-document.querySelector(".call").addEventListener("click", callApi, false);
-document.querySelector(".revoke").addEventListener("click", revoke, false);
 document.querySelector(".logout").addEventListener("click", logout, false);
+document.querySelector(".login").style.visibility = "visible";
+document.querySelector(".logout").style.visibility = "hidden";
 document.defaultView.addEventListener("load", renewToken, false);
 
 
 function log(data) {
-    document.getElementById('response').innerText = '';
-
-    Array.prototype.forEach.call(arguments, function (msg) {
-        if (msg instanceof Error) {
-            msg = "Error: " + msg.message;
-        }
-        else if (typeof msg !== 'string') {
-            msg = JSON.stringify(msg, null, 2);
-        }
-        document.getElementById('response').innerText += msg + '\r\n';
-    });
+    //document.getElementById('response').innerText = '';
+    console.log(data);
+    //Array.prototype.forEach.call(arguments, function (msg) {
+    //    if (msg instanceof Error) {
+    //        msg = "Error: " + msg.message;
+    //    }
+    //    else if (typeof msg !== 'string') {
+    //        msg = JSON.stringify(msg, null, 2);
+    //    }
+    //    document.getElementById('response').innerText += msg + '\r\n';
+    //});
 }
 
 function display(selector, data) {
@@ -151,14 +151,14 @@ function display(selector, data) {
 }
 
 function showTokens() {
-    mgr.getUser().then(function (user) {
-        if (user) {
-            display("#id-token", user);
-        }
-        else {
-            log("Not logged in");
-        }
-    });
+    //mgr.getUser().then(function (user) {
+    //    if (user) {
+    //        display("#id-token", user);
+    //    }
+    //    else {
+    //        log("Not logged in");
+    //    }
+    //});
 }
 showTokens();
 
@@ -173,7 +173,8 @@ function handleCallback() {
 
         log(result);
         showTokens();
-
+        document.querySelector(".login").style.visibility = "hidden";
+        document.querySelector(".logout").style.visibility = "visible";
         window.history.replaceState({},
             window.document.title,
             window.location.origin + window.location.pathname);
