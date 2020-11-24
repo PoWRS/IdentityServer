@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <PackageReference Include="Duende.IdentityServer.Storage" />
-    <PackageReference Include="IdentityModel" />
       
     <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
 
