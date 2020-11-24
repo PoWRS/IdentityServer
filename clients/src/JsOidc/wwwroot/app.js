@@ -84,8 +84,8 @@ function renewToken() {
     mgr.signinSilent()
         .then(function () {
             log("silent renew success");
-            document.querySelector(".login").style.visibility = "hidden";
-            document.querySelector(".logout").style.visibility = "visible";
+            //document.querySelector(".login").style.visibility = "hidden";
+            //document.querySelector(".logout").style.visibility = "visible";
             $('.drawer').drawer('close');
             showTokens();
         }).catch(function (err) {
@@ -117,14 +117,14 @@ if (window.location.hash) {
     handleCallback();
 }
 
-document.querySelector(".login").addEventListener("click", login, false);
-document.querySelector(".logout").addEventListener("click", logout, false);
-document.querySelector(".login").style.visibility = "visible";
-document.querySelector(".logout").style.visibility = "hidden";
+//document.querySelector(".logout").addEventListener("click", logout, false);
+//document.querySelector(".login").style.visibility = "visible";
+//document.querySelector(".logout").style.visibility = "hidden";
 document.defaultView.addEventListener("load", renewToken, false);
 $(document).ready(function () {
     $('.drawer').drawer();
     $('.drawer').drawer('open');
+    document.querySelector("#login").addEventListener("click", login, false);
 });
 
 
@@ -178,8 +178,8 @@ function handleCallback() {
 
         log(result);
         showTokens();
-        document.querySelector(".login").style.visibility = "hidden";
-        document.querySelector(".logout").style.visibility = "visible";
+        //document.querySelector(".login").style.visibility = "hidden";
+       // document.querySelector(".logout").style.visibility = "visible";
         $('.drawer').drawer('close');
         window.history.replaceState({},
             window.document.title,

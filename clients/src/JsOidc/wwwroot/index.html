@@ -11,27 +11,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
     <!-- drawer.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+    <style>            
+        #paywall {
+            height: 50vh
+        } 
+    </style>
 </head>
 
     <body class="drawer drawer--top">
         <header role="banner">
             <button type="button" class="drawer-toggle drawer-hamburger">
                 <span class="sr-only">toggle navigation</span>
-                <span class="drawer-hamburger-icon"></span>
+                <span style ="visibility:hidden" class ="drawer-hamburger-icon"></span>
             </button>
             
 
-            <nav class="drawer-nav" role="navigation">
-                <ul class="drawer-menu">
-                    <li><a class="drawer-brand" href="#">MONEY ME</a></li>
-                    <li><a class="drawer-brand" href="#">MONEY NOW</a></li>
-                    <li><a class="drawer-brand" href="#">ME A MONEY</a></li>
-                    <li><a class="drawer-brand" href="#">HAVING NOW</a></li>
-                    <li><button class="btn btn-info logout">Logout</button></li>
-                    <li>
-                        <button class="btn btn-default login">Login</button>
-                    </li>
+            <nav class="drawer-nav paywallcontainer" id="paywall" role="navigation">
+                <ul class="drawer-menu paywallitem">
+                    <li><a class="drawer-brand paywallitem" href="#">Please Subscribe</a></li>
+
                 </ul>
+                <div class="loginOptions paywallitem">
+                    <button class="btn btn-default login paywallitem">Subscribe</button>
+                    <button class="btn btn-default login">Login</button>
+                    <button id="login" class="btn btn-default login">Login with PoWRS</button>
+                    
+                </div>
+
             </nav>
         </header>
         <main role="main">
