@@ -40,11 +40,24 @@ namespace IdentityServerHost.Configuration
                         "https://localhost:44300/index.html",
                         "https://localhost:44300/callback.html",
                         "https://localhost:44300/silent.html",
-                        "https://localhost:44300/popup.html"
+                        "https://localhost:44300/popup.html",
+                        "https://localhost:44301/index.html",
+                        "https://localhost:44301/callback.html",
+                        "https://localhost:44301/silent.html",
+                        "https://localhost:44301/popup.html",
+                        "http://localhost:44300/index.html",
+                        "http://localhost:44300/callback.html",
+                        "http://localhost:44300/silent.html",
+                        "http://localhost:44300/popup.html",
+                        "http://localhost:44301/index.html",
+                        "http://localhost:44301/callback.html",
+                        "http://localhost:44301/silent.html",
+                        "http://localhost:44301/popup.html"
                     },
 
-                    PostLogoutRedirectUris = { "https://localhost:44300/index.html" },
-                    AllowedCorsOrigins = { "https://localhost:44300" },
+                    PostLogoutRedirectUris = { "https://localhost:44300/index.html", "https://localhost:44301/index.html" },
+                    AllowedCorsOrigins = { "https://localhost:44300","https://localhost:44301",
+                    "http://localhost:44300","http://localhost:44301"},
 
                     AllowedScopes = allowedScopes
                 },
