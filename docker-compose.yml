@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  site1:
+    image: site1
+    build: .
+    ports:
+      - "44300:44300"
+  site2:
+    image: site2
+    build:
+      context: .
+      args:
+        site_version: two
+    ports:
+      - "44301:44300"
