@@ -5,6 +5,11 @@
     font-style: normal;
 }
 
+.paywalltext {
+    white-space: nowrap;
+    align-content: center
+}
+
 .paywallcontainer {
     display: flex; /* or inline-flex */
     justify-content: center;
