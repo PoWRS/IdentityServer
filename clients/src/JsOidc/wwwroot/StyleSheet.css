@@ -1,11 +1,18 @@
-﻿.paywallcontainer {
+@font-face {
+    font-family: 'chomskyregular';
+    src: url('chomsky-webfont.woff2') format('woff2'), url('chomsky-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.paywallcontainer {
     display: flex; /* or inline-flex */
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 .paywallitem {
-    max-width 100px;
+    max-width: 100px;
 
 }
 .loginOptions {
@@ -27,6 +34,7 @@ body{
     color: #2f2f2f;
     background-color: #f9f7f1;
 }
+
 header{
     font-family: 'Playfair Display', serif;
     font-weight: 900;
