@@ -165,7 +165,7 @@ namespace IdentityServerHost
                      options.CallbackPath = "/signin-google";
                      options.Scope.Add("email");
                  })
-                .AddOpenIdConnect("demoidsrv", "IdentityServer", options =>
+                .AddOpenIdConnect("demoidsrv", "Facebook", options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.SignOutScheme = IdentityServerConstants.SignoutScheme;
@@ -184,7 +184,7 @@ namespace IdentityServerHost
                         RoleClaimType = "role"
                     };
                 })
-                .AddOpenIdConnect("aad", "Azure AD", options =>
+                .AddOpenIdConnect("aad", "Twitter", options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.SignOutScheme = IdentityServerConstants.SignoutScheme;
@@ -201,7 +201,7 @@ namespace IdentityServerHost
                         RoleClaimType = "role"
                     };
                 })
-                .AddOpenIdConnect("adfs", "ADFS", options =>
+                .AddOpenIdConnect("adfs", "Amazon", options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.SignOutScheme = IdentityServerConstants.SignoutScheme;

@@ -3,7 +3,6 @@
 <div class="login-page">
     <div class="lead">
         <h1>Login to PoWRS</h1>
-        <p>Choose how to login</p>
     </div>
 
     <partial name="_ValidationSummary" />
@@ -15,7 +14,7 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Local Account</h2>
+                        <h2>Sign-in</h2>
                     </div>
 
                     <div class="card-body">
@@ -32,17 +31,34 @@
                             </div>
                             @if (Model.AllowRememberLogin)
                             {
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" asp-for="RememberLogin">
-                                        <label class="form-check-label" asp-for="RememberLogin">
-                                            Remember My Login
-                                        </label>
-                                    </div>
-                                </div>
-                            }
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="RememberLogin">
+                                <label class="form-check-label" asp-for="RememberLogin">
+                                    Remember My Login
+                                </label>
+                            </div>
+                        </div>}
                             <button class="btn btn-primary" name="button" value="login">Login</button>
                             <button class="btn btn-secondary" name="button" value="cancel">Cancel</button>
+                            <div class="form-group">
+                                <label>External Login</label>
+                                <ul class="list-inline">
+                                    @foreach (var provider in Model.VisibleExternalProviders)
+                                    {
+                                        <li class="list-inline-item">
+                                            <a class="btn btn-secondary"
+                                               asp-controller="External"
+                                               asp-action="Challenge"
+                                               asp-route-scheme="@provider.AuthenticationScheme"
+                                               asp-route-returnUrl="@Model.ReturnUrl">
+                                                @provider.DisplayName
+                                                <img src="@provider.ImageUrl" height="26" width="26" />
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                                </div>
                         </form>
                     </div>
                 </div>
@@ -54,22 +70,26 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h2>External Account</h2>
+                        <h2>Sign-up</h2>
                     </div>
                     <div class="card-body">
+                        One flat monthly payment
+
+                        <br>
+                        Get started by choosing a login provider
                         <ul class="list-inline">
                             @foreach (var provider in Model.VisibleExternalProviders)
                             {
-                                <li class="list-inline-item">
-                                    <a class="btn btn-secondary"
-                                       asp-controller="External"
-                                       asp-action="Challenge"
-                                       asp-route-scheme="@provider.AuthenticationScheme"
-                                       asp-route-returnUrl="@Model.ReturnUrl">
-                                        @provider.DisplayName
-                                    </a>
-                                </li>
-                            }
+                    <li class="list-inline-item">
+                        <a class="btn btn-secondary"
+                           asp-controller="External"
+                           asp-action="Challenge"
+                           asp-route-scheme="@provider.AuthenticationScheme"
+                           asp-route-returnUrl="@Model.ReturnUrl">
+                            @provider.DisplayName
+                            <img src="@provider.ImageUrl" height="26" width="26" />
+                        </a>
+                    </li>}
                         </ul>
                     </div>
                 </div>

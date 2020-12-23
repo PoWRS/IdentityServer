@@ -1,4 +1,4 @@
-﻿// Copyright (c) Duende Software. All rights reserved.
+// Copyright (c) Duende Software. All rights reserved.
 // See LICENSE in the project root for license information.
 
 
@@ -31,7 +31,7 @@ namespace IdentityServerHost.Quickstart.UI
                 // also consider adding upgrade-insecure-requests once you have HTTPS in place for production
                 //csp += "upgrade-insecure-requests;";
                 // also an example if you need client images to be displayed from twitter
-                // csp += "img-src 'self' https://pbs.twimg.com;";
+                csp += "img-src 'self' https://s.gr-assets.com;";
 
                 // once for standards compliant browsers
                 if (!context.HttpContext.Response.Headers.ContainsKey("Content-Security-Policy"))
