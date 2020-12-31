@@ -52,12 +52,25 @@ namespace IdentityServerHost.Configuration
                         "http://localhost:44301/index.html",
                         "http://localhost:44301/callback.html",
                         "http://localhost:44301/silent.html",
-                        "http://localhost:44301/popup.html"
+                        "http://localhost:44301/popup.html",
+                        "http://newpostyork.com:44300/index.html",
+                        "http://newpostyork.com:44300/callback.html",
+                        "http://newpostyork.com:44300/silent.html",
+                        "http://newpostyork.com:44300/popup.html",
+                        "http://postingtonwash.com:44300/index.html",
+                        "http://postingtonwash.com:44300/callback.html",
+                        "http://postingtonwash.com:44300/silent.html",
+                        "http://postingtonwash.com:44300/popup.html"
                     },
 
-                    PostLogoutRedirectUris = { "https://localhost:44300/index.html", "https://localhost:44301/index.html" },
+                    PostLogoutRedirectUris = { "https://localhost:44300/index.html", "https://localhost:44301/index.html",
+                        "http://postingtonwash.com:44300/index2.html",
+                        "http://newpostyork.com:44300/index.html", },
                     AllowedCorsOrigins = { "https://localhost:44300","https://localhost:44301",
-                    "http://localhost:44300","http://localhost:44301"},
+                    "http://localhost:44300","http://localhost:44301",
+                    "http://newpostyork.com:44300","http://newpostyork.com:44301",
+                    "http://postingtonwash.com:44300","http://postingtonwash.com:44301"
+                    },
 
                     AllowedScopes = allowedScopes
                 },

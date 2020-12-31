@@ -1,24 +1,24 @@
-from mcr.microsoft.com/dotnet/sdk 
-ARG site_version=
-# Do "--build-arg site_version=YES" to build the alternate version of the container for the alternate site
-RUN echo $site_version
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-# Install .NET Core SDK
-RUN dotnet_sdk_version=3.1.404 \
-    && curl -SL --output dotnet.tar.gz https://dotnetcli.azureedge.net/dotnet/Sdk/$dotnet_sdk_version/dotnet-sdk-$dotnet_sdk_version-linux-x64.tar.gz \
-    && dotnet_sha512='94d8eca3b4e2e6c36135794330ab196c621aee8392c2545a19a991222e804027f300d8efd152e9e4893c4c610d6be8eef195e30e6f6675285755df1ea49d3605' \
-    && echo "$dotnet_sha512 dotnet.tar.gz" | sha512sum -c - \
-    && mkdir -p /usr/share/dotnet3 \
-    && tar -ozxf dotnet.tar.gz -C /usr/share/dotnet \
-    && rm dotnet.tar.gz \
-    && ln -s /usr/share/dotnet3/dotnet /usr/bin/dotnet3 \
-    # Trigger first run experience by running arbitrary cmd
-    && dotnet help
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
+WORKDIR /app
+EXPOSE 80
 
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+WORKDIR /src
+COPY ["./src/IdentityServer/host/packages.lock.json", "/src/src/IdentityServer/src/"]
+COPY ["./src/IdentityServer/src/packages.lock.json", "/src/src/IdentityServer/src/"]
+COPY ["./src/IdentityServer/host/Host.csproj", "/src/src/IdentityServer/host/"]
+COPY ["./src/IdentityServer/src/Duende.IdentityServer.csproj", "/src/src/IdentityServer/src/"]
+RUN dotnet restore "/src/src/IdentityServer/src/Duende.IdentityServer.csproj" --lock-file-path "/src/src/IdentityServer/src/packages.lock.json"
+RUN dotnet restore "/src/src/IdentityServer/host/Host.csproj" --lock-file-path "/src/src/IdentityServer/host/packages.lock.json"
 COPY . .
-WORKDIR clients
-RUN dotnet restore
-RUN dotnet build
-WORKDIR src/JsOidc
-RUN ./select_version.sh
-CMD ["dotnet", "run", "JsOidc.csproj"]
+WORKDIR "/src/src/IdentityServer/host"
+RUN dotnet build "Host.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Host.csproj" -c Release -o /app/publish  --framework net5.0
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Host.dll"]
