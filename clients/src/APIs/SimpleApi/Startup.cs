@@ -1,13 +1,6 @@
-﻿using Clients;
+using Clients;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpOverrides;
 
 namespace SampleApi
 {
@@ -19,6 +12,9 @@ namespace SampleApi
 
             services.AddCors();
             services.AddDistributedMemoryCache();
+
+            // remove Microsoft's custom claim mapping
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             // this API will accept any access token from the authority
             services.AddAuthentication("token")

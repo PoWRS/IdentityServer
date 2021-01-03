@@ -1,0 +1,32 @@
+<Project>
+ <PropertyGroup>
+    <PackageTags>OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;ASP.NET Core</PackageTags>
+    <Authors>Duende Software</Authors>
+    <Company>Duende Software</Company>
+    <Copyright>Duende Software</Copyright>
+    <Product>Duende IdentityServer</Product>
+
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/DuendeSoftware/IdentityServer</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/DuendeSoftware/IdentityServer/releases</PackageReleaseNotes>
+
+     <!-- Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+     <!-- Embed source files that are not tracked by the source control manager in the PDB -->
+     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
+     <DebugType>embedded</DebugType>
+     
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
+ </PropertyGroup>
+
+ <ItemGroup>
+    <None Include="../../LICENSE" Pack="true" Visible="false" PackagePath="" />
+    <None Include="../../icon.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+</Project>
