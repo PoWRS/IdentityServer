@@ -1,7 +1,7 @@
 /// <reference path="libs/oidc-client.js" />
 
 var config = {
-    authority: "https://localhost:5001/",
+    authority: "http://18.218.93.226/",
     client_id: "js_oidc",
     redirect_uri: window.location.origin + "/callback.html",
     post_logout_redirect_uri: window.location.origin + "/index.html",

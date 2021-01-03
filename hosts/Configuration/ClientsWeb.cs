@@ -35,7 +35,7 @@ namespace IdentityServerHost.Configuration
                     AllowedGrantTypes = GrantTypes.Code,
                     RequireClientSecret = false,
                     
-                    RedirectUris = 
+                    RedirectUris =
                     {
                         "https://localhost:44300/index.html",
                         "https://localhost:44300/callback.html",
@@ -60,16 +60,35 @@ namespace IdentityServerHost.Configuration
                         "http://postingtonwash.com:44300/index.html",
                         "http://postingtonwash.com:44300/callback.html",
                         "http://postingtonwash.com:44300/silent.html",
-                        "http://postingtonwash.com:44300/popup.html"
+                        "http://postingtonwash.com:44300/popup.html",
+
+                        "http://18.221.44.78/index.html",
+                        "http://18.221.44.78/callback.html",
+                        "http://18.221.44.78/silent.html",
+                        "http://18.221.44.78/popup.html",
+
+                        "http://18.221.44.78/index2.html",
                     },
 
-                    PostLogoutRedirectUris = { "https://localhost:44300/index.html", "https://localhost:44301/index.html",
+                    PostLogoutRedirectUris = { 
+                        "https://localhost:44300/index.html", 
+                        "https://localhost:44301/index.html",
                         "http://postingtonwash.com:44300/index2.html",
-                        "http://newpostyork.com:44300/index.html", },
-                    AllowedCorsOrigins = { "https://localhost:44300","https://localhost:44301",
-                    "http://localhost:44300","http://localhost:44301",
-                    "http://newpostyork.com:44300","http://newpostyork.com:44301",
-                    "http://postingtonwash.com:44300","http://postingtonwash.com:44301"
+                        "http://newpostyork.com:44300/index.html",
+
+                        "http://18.221.44.78/index2.html",
+                        "http://18.221.44.78/index.html",
+                    },
+                    AllowedCorsOrigins = { 
+                        "https://localhost:44300",
+                        "https://localhost:44301",
+                        "http://localhost:44300",
+                        "http://localhost:44301",
+                        "http://newpostyork.com:44300",
+                        "http://newpostyork.com:44301",
+                        "http://postingtonwash.com:44300",
+                        "http://postingtonwash.com:44301",
+                        "http://18.221.44.78"
                     },
 
                     AllowedScopes = allowedScopes

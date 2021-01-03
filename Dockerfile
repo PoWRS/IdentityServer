@@ -6,19 +6,20 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["./src/IdentityServer/host/packages.lock.json", "/src/src/IdentityServer/src/"]
-COPY ["./src/IdentityServer/src/packages.lock.json", "/src/src/IdentityServer/src/"]
-COPY ["./src/IdentityServer/host/Host.csproj", "/src/src/IdentityServer/host/"]
-COPY ["./src/IdentityServer/src/Duende.IdentityServer.csproj", "/src/src/IdentityServer/src/"]
-RUN dotnet restore "/src/src/IdentityServer/src/Duende.IdentityServer.csproj" --lock-file-path "/src/src/IdentityServer/src/packages.lock.json"
-RUN dotnet restore "/src/src/IdentityServer/host/Host.csproj" --lock-file-path "/src/src/IdentityServer/host/packages.lock.json"
+
+COPY ["./hosts/main/Host.Main.csproj", "/src/hosts/main/"]
+COPY ["./src/IdentityServer/Duende.IdentityServer.csproj", "/src/src/IdentityServer/"]
+COPY ["./src/Storage/Duende.IdentityServer.Storage.csproj", "/src/src/Storage/"]
+RUN dotnet restore "/src/src/Storage/Duende.IdentityServer.Storage.csproj"
+RUN dotnet restore "/src/src/IdentityServer/Duende.IdentityServer.csproj"
+RUN dotnet restore "/src/hosts/main/Host.Main.csproj"
 COPY . .
-WORKDIR "/src/src/IdentityServer/host"
-RUN dotnet build "Host.csproj" -c Release -o /app/build
+WORKDIR "/src/hosts/main/"
+RUN dotnet build "Host.Main.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Host.csproj" -c Release -o /app/publish  --framework net5.0
+RUN dotnet publish "Host.Main.csproj" -c Release -o /app/publish  --framework net5.0
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Host.dll"]
+ENTRYPOINT ["dotnet", "Host.Main.dll"]
