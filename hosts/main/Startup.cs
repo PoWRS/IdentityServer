@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.HttpOverrides;
 using IdentityServerHost.Quickstart.UI;
 using Duende.IdentityServer.Configuration;
+using Microsoft.Extensions.Primitives;
+using Microsoft.AspNetCore.Http;
 
 namespace IdentityServerHost
 {
@@ -86,12 +88,30 @@ namespace IdentityServerHost
             });
             services.AddCors();
         }
-
+        private const string XForwardedPathBase = "X-Forwarded-PathBase";
+        private const string XForwardedProto = "X-Forwarded-Proto";
         public void Configure(IApplicationBuilder app)
         {
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+
+
+            app.Use((context, next) =>
+            {
+                if (context.Request.Headers.TryGetValue(XForwardedPathBase, out StringValues pathBase))
+                {
+                    context.Request.PathBase = new PathString(pathBase);
+
+                }
+
+                if (context.Request.Headers.TryGetValue(XForwardedProto, out StringValues proto))
+                {
+                    context.Request.Scheme = proto;
+                }
+
+                return next();
             });
 
             app.UseCertificateForwarding();
@@ -160,7 +180,7 @@ namespace IdentityServerHost
                      options.ForwardSignOut = IdentityServerConstants.DefaultCookieAuthenticationScheme;
 
                      options.Authority = "https://accounts.google.com/";
-                     options.ClientId = "708996912208-9m4dkjb5hscn7cjrn5u0r4tbgkbj1fko.apps.googleusercontent.com";
+                     options.ClientId = "480241993854-89j2uhf6bg56ufi93rtvkr16hf5sv5sl.apps.googleusercontent.com";
 
                      options.CallbackPath = "/signin-google";
                      options.Scope.Add("email");

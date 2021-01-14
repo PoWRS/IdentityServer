@@ -14,7 +14,10 @@ namespace JsOidc
                             options.AddPolicy(name: MyAllowSpecificOrigins,
                                               builder =>
                                               {
-                                                  builder.WithOrigins("https://localhost:5001/");
+                                                  builder.WithOrigins("http://localhost:9090/",
+                                                      "https://localhost:9090/",
+                                                      "https://demo.identity.subless.com/",
+                                                      "http://ec2co-ecsel-f17xbspr0h75-664147277.us-east-1.elb.amazonaws.com:8080/");
                                               });
                         });
         }

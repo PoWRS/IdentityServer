@@ -1,9 +1,10 @@
 /// <reference path="libs/oidc-client.js" />
 
 var config = {
-    authority: "http://18.218.93.226/",
+    //authority: "http://ec2co-ecsel-f17xbspr0h75-664147277.us-east-1.elb.amazonaws.com:8080/",
+    authority: "https://demo.identity.subless.com/",
     client_id: "js_oidc",
-    redirect_uri: window.location.origin + "/callback.html",
+    redirect_uri: window.location.origin + "/index.html",//"/callback.html",
     post_logout_redirect_uri: window.location.origin + "/index.html",
 
     // if we choose to use popup window instead for logins
@@ -81,45 +82,22 @@ function revoke() {
 }
 
 function renewToken() {
-    mgr.signinSilent()
-        .then(function () {
-            log("silent renew success");
-            //document.querySelector(".login").style.visibility = "hidden";
-            //document.querySelector(".logout").style.visibility = "visible";
-            $('.drawer').drawer('close');
-            showTokens();
-        }).catch(function (err) {
-            log("silent renew error", err);
-        });
-}
-function callApi() {
-    mgr.getUser().then(function (user) {
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function (e) {
-            if (xhr.status >= 400) {
-                display("#ajax-result", {
-                    status: xhr.status,
-                    statusText: xhr.statusText,
-                    wwwAuthenticate: xhr.getResponseHeader("WWW-Authenticate")
+            mgr.signinSilent()
+                .then(function () {
+                    log("silent renew success");
+                    $('.drawer').drawer('close');
+                    showTokens();
+                }).catch(function (err) {
+                    log("silent renew error", err);
+                    
                 });
-            }
-            else {
-                display("#ajax-result", xhr.response);
-            }
-        };
-        xhr.open("GET", "http://0.0.0.0:5005/identity", true);
-        xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
-        xhr.send();
-    });
+
 }
 
-if (window.location.hash) {
+if (window.location.hash || window.location.search) {
     handleCallback();
 }
 
-//document.querySelector(".logout").addEventListener("click", logout, false);
-//document.querySelector(".login").style.visibility = "visible";
-//document.querySelector(".logout").style.visibility = "hidden";
 document.defaultView.addEventListener("load", renewToken, false);
 $(document).ready(function () {
     $('.drawer').drawer();
@@ -129,17 +107,7 @@ $(document).ready(function () {
 
 
 function log(data) {
-    //document.getElementById('response').innerText = '';
     console.log(data);
-    //Array.prototype.forEach.call(arguments, function (msg) {
-    //    if (msg instanceof Error) {
-    //        msg = "Error: " + msg.message;
-    //    }
-    //    else if (typeof msg !== 'string') {
-    //        msg = JSON.stringify(msg, null, 2);
-    //    }
-    //    document.getElementById('response').innerText += msg + '\r\n';
-    //});
 }
 
 function display(selector, data) {
@@ -156,14 +124,14 @@ function display(selector, data) {
 }
 
 function showTokens() {
-    //mgr.getUser().then(function (user) {
-    //    if (user) {
-    //        display("#id-token", user);
-    //    }
-    //    else {
-    //        log("Not logged in");
-    //    }
-    //});
+    mgr.getUser().then(function (user) {
+        if (user) {
+            log("#id-token" + user);
+        }
+        else {
+            log("Not logged in");
+        }
+    });
 }
 showTokens();
 

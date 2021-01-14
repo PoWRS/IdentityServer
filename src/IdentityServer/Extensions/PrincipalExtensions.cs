@@ -214,6 +214,7 @@ namespace Duende.IdentityServer.Extensions
         [DebuggerStepThrough]
         public static bool IsAuthenticated(this IPrincipal principal)
         {
+
             return principal != null && principal.Identity != null && principal.Identity.IsAuthenticated;
         }
     }
