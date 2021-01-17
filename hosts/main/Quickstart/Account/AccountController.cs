@@ -289,15 +289,15 @@ namespace IdentityServerHost.Quickstart.UI
                             case "Google":
                                 provider.ImageUrl = "https://s.gr-assets.com/assets/gr/third_party/google_circle-694153be668f0720f058e755b6f136c6.png";
                                 break;
-                            case "Facebook":
-                                provider.ImageUrl = "https://s.gr-assets.com/assets/gr/share_module/share_facebook_circle-ecf94fc18c887e845025d979d27f758d.svg";
-                                break;
-                            case "Twitter":
-                                provider.ImageUrl = "https://s.gr-assets.com/assets/gr/share_module/share_twitter_circle-1e3cc199af6bf2bd798502acf873657a.svg";
-                                break;
-                            case "Amazon":
-                                provider.ImageUrl = "https://s.gr-assets.com/assets/gr/third_party/amazon_circle-5596868f0d928f2945f3374b01f5e10b.png";
-                                break;
+                            //case "Facebook":
+                            //    provider.ImageUrl = "https://s.gr-assets.com/assets/gr/share_module/share_facebook_circle-ecf94fc18c887e845025d979d27f758d.svg";
+                            //    break;
+                            //case "Twitter":
+                            //    provider.ImageUrl = "https://s.gr-assets.com/assets/gr/share_module/share_twitter_circle-1e3cc199af6bf2bd798502acf873657a.svg";
+                            //    break;
+                            //case "Amazon":
+                            //    provider.ImageUrl = "https://s.gr-assets.com/assets/gr/third_party/amazon_circle-5596868f0d928f2945f3374b01f5e10b.png";
+                            //    break;
                             default:
                                 break;
 
