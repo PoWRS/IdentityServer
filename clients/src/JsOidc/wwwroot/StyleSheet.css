@@ -4,6 +4,12 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'AlegreyaSC';
+    src: url('AlegreyaSC-ExtraBold.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .paywalltext {
     white-space: nowrap;
